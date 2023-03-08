@@ -33,7 +33,7 @@ function Part(props: { part: CoursePart }) {
               {part.name} {part.exerciseCount}
             </strong>
           </div>
-          <div>project exercises {part.groupProjectCount}</div>
+          <div>Project exercises: {part.groupProjectCount}</div>
         </p>
       );
     }
@@ -49,7 +49,7 @@ function Part(props: { part: CoursePart }) {
             <em>{part.description}</em>
           </div>
           <div>
-            submit to{" "}
+            Submit to:{" "}
             <a href={part.backroundMaterial} target="_blank" rel="noreferrer">
               {part.backroundMaterial}
             </a>
@@ -130,6 +130,13 @@ export function App() {
       exerciseCount: 10,
       description: "a hard part",
       kind: "basic",
+    },
+    {
+      name: "Backend development",
+      exerciseCount: 21,
+      description: "Typing the backend",
+      requirements: ["nodejs", "jest"],
+      kind: "special",
     },
   ];
   const totalExercises = courseParts.reduce(
