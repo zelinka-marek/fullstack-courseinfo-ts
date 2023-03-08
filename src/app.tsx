@@ -1,4 +1,5 @@
 import type { CoursePart } from "./types";
+import { assertNever } from "./utils";
 
 function Header(props: { name: string }) {
   const { name } = props;
@@ -6,20 +7,20 @@ function Header(props: { name: string }) {
   return <h1>{name}</h1>;
 }
 
-function Part(props: { course: CoursePart }) {
-  const { course } = props;
+function Part(props: { part: CoursePart }) {
+  const { part } = props;
 
-  switch (course.kind) {
+  switch (part.kind) {
     case "basic": {
       return (
         <p>
           <div>
             <strong>
-              {course.name} {course.exerciseCount}
+              {part.name} {part.exerciseCount}
             </strong>
           </div>
           <div>
-            <em>{course.description}</em>
+            <em>{part.description}</em>
           </div>
         </p>
       );
@@ -29,10 +30,10 @@ function Part(props: { course: CoursePart }) {
         <p>
           <div>
             <strong>
-              {course.name} {course.exerciseCount}
+              {part.name} {part.exerciseCount}
             </strong>
           </div>
-          <div>project exercises {course.groupProjectCount}</div>
+          <div>project exercises {part.groupProjectCount}</div>
         </p>
       );
     }
@@ -41,20 +42,23 @@ function Part(props: { course: CoursePart }) {
         <p>
           <div>
             <strong>
-              {course.name} {course.exerciseCount}
+              {part.name} {part.exerciseCount}
             </strong>
           </div>
           <div>
-            <em>{course.description}</em>
+            <em>{part.description}</em>
           </div>
           <div>
             submit to{" "}
-            <a href={course.backroundMaterial} target="_blank" rel="noreferrer">
-              {course.backroundMaterial}
+            <a href={part.backroundMaterial} target="_blank" rel="noreferrer">
+              {part.backroundMaterial}
             </a>
           </div>
         </p>
       );
+    }
+    default: {
+      return assertNever(part);
     }
   }
 }
@@ -65,7 +69,7 @@ function Content(props: { parts: CoursePart[] }) {
   return (
     <div>
       {parts.map((part) => (
-        <Part key={part.name} course={part} />
+        <Part key={part.name} part={part} />
       ))}
     </div>
   );
