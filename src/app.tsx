@@ -6,15 +6,66 @@ function Header(props: { name: string }) {
   return <h1>{name}</h1>;
 }
 
+function Part(props: { course: CoursePart }) {
+  const { course } = props;
+
+  switch (course.kind) {
+    case "basic": {
+      return (
+        <p>
+          <div>
+            <strong>
+              {course.name} {course.exerciseCount}
+            </strong>
+          </div>
+          <div>
+            <em>{course.description}</em>
+          </div>
+        </p>
+      );
+    }
+    case "group": {
+      return (
+        <p>
+          <div>
+            <strong>
+              {course.name} {course.exerciseCount}
+            </strong>
+          </div>
+          <div>project exercises {course.groupProjectCount}</div>
+        </p>
+      );
+    }
+    case "background": {
+      return (
+        <p>
+          <div>
+            <strong>
+              {course.name} {course.exerciseCount}
+            </strong>
+          </div>
+          <div>
+            <em>{course.description}</em>
+          </div>
+          <div>
+            submit to{" "}
+            <a href={course.backroundMaterial} target="_blank" rel="noreferrer">
+              {course.backroundMaterial}
+            </a>
+          </div>
+        </p>
+      );
+    }
+  }
+}
+
 function Content(props: { parts: CoursePart[] }) {
   const { parts } = props;
 
   return (
     <div>
       {parts.map((part) => (
-        <p key={part.name}>
-          {part.name} {part.exerciseCount}
-        </p>
+        <Part key={part.name} course={part} />
       ))}
     </div>
   );
