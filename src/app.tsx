@@ -57,6 +57,21 @@ function Part(props: { part: CoursePart }) {
         </p>
       );
     }
+    case "special": {
+      return (
+        <p>
+          <div>
+            <strong>
+              {part.name} {part.exerciseCount}
+            </strong>
+          </div>
+          <div>
+            <em>{part.description}</em>
+          </div>
+          <div>Required skills: {part.requirements.join(", ")}</div>
+        </p>
+      );
+    }
     default: {
       return assertNever(part);
     }
