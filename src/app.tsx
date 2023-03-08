@@ -93,7 +93,11 @@ function Content(props: { parts: CoursePart[] }) {
 function Total(props: { count: number }) {
   const { count } = props;
 
-  return <p>Number of exercises {count}</p>;
+  return (
+    <p>
+      Number of exercises: <strong>{count}</strong>
+    </p>
+  );
 }
 
 export function App() {
